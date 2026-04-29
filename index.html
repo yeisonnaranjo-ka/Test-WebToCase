@@ -78,32 +78,7 @@
     </style>
 </head>
 <body>
-    <div class="forms-wrapper">        
-        <div class="container">
-            <h2>Web-to-Case Form</h2>
-            <form id="caseForm" action="https://spins--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DTI000006fFIz" method="POST">
-                <input type="hidden" name="orgid" value="00DTI000006fFIz">
-                <input type="hidden" name="retURL" value="https://yeisonnaranjo-ka.github.io/Test-Chat/">
-
-                <label for="name">Contact Name</label>
-                <input id="name" maxlength="80" name="name" type="text" required />
-
-                <label for="email">Email</label>
-                <input id="email" maxlength="80" name="email" type="email" required />
-
-                <label for="subject">Subject</label>
-                <input id="subject" maxlength="80" name="subject" type="text" required />
-
-                <label for="description">Description</label>
-                <textarea name="description" required></textarea>
-
-                <label for="phone">Phone</label>
-                <input id="phone" maxlength="40" name="phone" type="text" />
-
-                <input type="submit" name="submit" value="Create Case" class="submit-btn">
-            </form>
-        </div>
-
+    <div class="forms-wrapper">
         <div class="container">
             <h2>Web-to-Lead Form</h2>
             <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D7x00000QENu2" method="POST">
@@ -135,44 +110,6 @@
                 <input type="submit" name="submit" value="Create Lead" class="submit-btn">
             </form>
         </div>
-
     </div>
-
-    <script type='text/javascript'>
-        // Function to show thank you message
-        function showThankYouMessage(event) {
-            alert("Thank you for your submission. You will receive further details at your registered email address shortly.");
-        }
-
-        // Attach listeners to both forms
-        document.getElementById('caseForm').onsubmit = showThankYouMessage;
-        document.getElementById('leadForm').onsubmit = showThankYouMessage;
-
-        function initEmbeddedMessaging() {
-            try {
-                window.addEventListener("onEmbeddedMessagingReady", e => {
-                    embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
-                        "_firstName": { "value": "Yeison", "isEditableByEndUser": false },
-                        "_lastName": { "value": "Naranjo", "isEditableByEndUser": false },
-                        "_email": { "value": "yeison.naranjo@perficient.com", "isEditableByEndUser": false }
-                    });
-                    embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"CustomerType" : "Brand"});
-                });
-                
-                embeddedservice_bootstrap.settings.language = 'en_US'; 
-
-                embeddedservice_bootstrap.init(
-                    '00DTI000006fFIz',
-                    'Spins_Messaging_Settings',
-                    'https://spins--uat.sandbox.my.site.com/ESWSpinsMessagingSettin1776964204114',
-                    { scrt2URL: 'https://spins--uat.sandbox.my.salesforce-scrt.com' }
-                );
-            } catch (err) {
-                console.error('Error loading Embedded Messaging: ', err);
-            }
-        };
-    </script>
-    <script type='text/javascript' src='https://spins--uat.sandbox.my.site.com/ESWSpinsMessagingSettin1776964204114/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-
 </body>
 </html>
