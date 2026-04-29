@@ -3,40 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <title>Agentforce Local Test</title>
+    <title>Agentforce & Salesforce Forms Test</title>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
     <style>
         body { 
             background-color: #f4f4f4; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
             margin: 0;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .main-header {
+            color: #004587;
+            margin-bottom: 30px;
+        }
+        .forms-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            max-width: 1000px;
         }
         .container {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
+            flex: 1;
+            min-width: 320px;
+            max-width: 450px;
         }
-        h1 {
-            color: #004587;
-            font-size: 22px;
-            text-align: center;
-            margin-bottom: 25px;
+        h2 {
+            color: #0176d3;
+            font-size: 18px;
+            border-bottom: 2px solid #f4f4f4;
+            padding-bottom: 10px;
+            margin-top: 0;
         }
         form label {
             display: block;
             margin-top: 10px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
         }
-        form input, form textarea {
+        form input, form textarea, form select {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -45,8 +58,7 @@
             box-sizing: border-box;
         }
         form textarea {
-            height: 80px;
-            resize: vertical;
+            height: 60px;
         }
         .submit-btn {
             background-color: #0176d3;
@@ -57,7 +69,7 @@
             width: 100%;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
         }
         .submit-btn:hover {
@@ -66,64 +78,94 @@
     </style>
 </head>
 <body>
+    <div class="forms-wrapper">        
+        <div class="container">
+            <h2>Web-to-Case Form</h2>
+            <form id="caseForm" action="https://spins--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DTI000006fFIz" method="POST">
+                <input type="hidden" name="orgid" value="00DTI000006fFIz">
+                <input type="hidden" name="retURL" value="https://yeisonnaranjo-ka.github.io/Test-Chat/">
 
-    <div class="container">        
-        <form action="https://spins--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DTI000006fFIz" method="POST">
-            <input type="hidden" name="orgid" value="00DTI000006fFIz">
-            <input type="hidden" name="retURL" value="https://yeisonnaranjo-ka.github.io/Test-Chat/">
+                <label for="name">Contact Name</label>
+                <input id="name" maxlength="80" name="name" type="text" required />
 
-            <label for="name">Contact Name</label>
-            <input id="name" maxlength="80" name="name" size="20" type="text" required />
+                <label for="email">Email</label>
+                <input id="email" maxlength="80" name="email" type="email" required />
 
-            <label for="email">Email</label>
-            <input id="email" maxlength="80" name="email" size="20" type="email" required />
+                <label for="subject">Subject</label>
+                <input id="subject" maxlength="80" name="subject" type="text" required />
 
-            <label for="subject">Subject</label>
-            <input id="subject" maxlength="80" name="subject" size="20" type="text" required />
+                <label for="description">Description</label>
+                <textarea name="description" required></textarea>
 
-            <label for="description">Description</label>
-            <textarea name="description" required></textarea>
+                <label for="phone">Phone</label>
+                <input id="phone" maxlength="40" name="phone" type="text" />
 
-            <label for="phone">Phone</label>
-            <input id="phone" maxlength="40" name="phone" size="20" type="text" />
+                <input type="submit" name="submit" value="Create Case" class="submit-btn">
+            </form>
+        </div>
 
-            <input type="submit" name="submit" value="Submit Case" class="submit-btn">
-        </form>
+        <div class="container">
+            <h2>Web-to-Lead Form</h2>
+            <form id="leadForm" action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D7x00000QENu2" method="POST">
+                <input type="hidden" name="oid" value="00D7x00000QENu2">
+                <input type="hidden" name="retURL" value="https://yeisonnaranjo-ka.github.io/Test-Chat/">
+
+                <label for="first_name">First Name</label>
+                <input id="first_name" maxlength="40" name="first_name" type="text" required/>
+
+                <label for="last_name">Last Name</label>
+                <input id="last_name" maxlength="80" name="last_name" type="text" required/>
+
+                <label for="email">Email</label>
+                <input id="email_lead" maxlength="80" name="email" type="email" required/>
+
+                <label for="company">Company</label>
+                <input id="company" maxlength="40" name="company" type="text" required/>
+
+                <label for="city">City</label>
+                <input id="city" maxlength="40" name="city" type="text" />
+
+                <label for="country_code">Country</label>
+                <select id="country_code" name="country_code">
+                    <option value="">--None--</option>
+                    <option value="CO">Colombia</option>
+                    <option value="US">United States</option>
+                </select>
+
+                <input type="submit" name="submit" value="Create Lead" class="submit-btn">
+            </form>
+        </div>
+
     </div>
 
     <script type='text/javascript'>
+        // Function to show thank you message
+        function showThankYouMessage(event) {
+            alert("Thank you for your submission. You will receive further details at your registered email address shortly.");
+        }
+
+        // Attach listeners to both forms
+        document.getElementById('caseForm').onsubmit = showThankYouMessage;
+        document.getElementById('leadForm').onsubmit = showThankYouMessage;
+
         function initEmbeddedMessaging() {
             try {
                 window.addEventListener("onEmbeddedMessagingReady", e => {
-                    // Pre-chat configuration for Yeison
                     embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
-                        "_firstName": {
-                            "value": "Yeison",
-                            "isEditableByEndUser": false
-                        },
-                        "_lastName": {
-                            "value": "Naranjo",
-                            "isEditableByEndUser": false
-                        },
-                        "_email": {
-                            "value": "yeison.naranjo@perficient.com",
-                            "isEditableByEndUser": false
-                        }
+                        "_firstName": { "value": "Yeison", "isEditableByEndUser": false },
+                        "_lastName": { "value": "Naranjo", "isEditableByEndUser": false },
+                        "_email": { "value": "yeison.naranjo@perficient.com", "isEditableByEndUser": false }
                     });
-
                     embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({"CustomerType" : "Brand"});
                 });
                 
-                // Force language to English
                 embeddedservice_bootstrap.settings.language = 'en_US'; 
 
                 embeddedservice_bootstrap.init(
                     '00DTI000006fFIz',
                     'Spins_Messaging_Settings',
                     'https://spins--uat.sandbox.my.site.com/ESWSpinsMessagingSettin1776964204114',
-                    {
-                        scrt2URL: 'https://spins--uat.sandbox.my.salesforce-scrt.com'
-                    }
+                    { scrt2URL: 'https://spins--uat.sandbox.my.salesforce-scrt.com' }
                 );
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
